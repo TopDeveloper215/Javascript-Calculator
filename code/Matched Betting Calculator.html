@@ -1,0 +1,1955 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--<![endif]-->
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>OddsMonkey Standard Calculator</title>
+	<meta name="author" content="OddsMonkey" />
+	<meta name="description" content="OddsMonkey Standard Calculator" />
+	<meta name="keywords" content="calculator, betting, matchedbetting, odds" />
+	<link rel="shortcut icon" href="favicon.ico" type="image/vnd.microsoft.icon" />
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<!--<script src="/scripts/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script><!-->
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.min.css" integrity="sha512-+0Vhbu8sRUlg+R/NKgTv7ahM+szPDF10G6J5PcHb1tOrAaquZIUiKUV3TH16mi6fuH4NjvHqlok6ppBhR6Nxuw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="js/jquery.ui.touch-punch.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/OMCalc_Common.css" />
+	<style>
+	html,
+	form,
+	body {
+		background-color: transparent;
+		font-family: open sans, sans-serif;
+		font-size: 14px;
+		color: #022249;
+	}
+
+	h2 {
+		font-size: 1.5rem;
+		font-weight: 700;
+		line-height: 1.2;
+		margin: 0;
+	}
+
+	a {
+		color: #0a71ae;
+		text-decoration: underline;
+		background-color: transparent;
+	}
+
+	a:hover {
+		color: #000;
+		text-decoration: underline;
+	}
+
+	input[type=number]::-webkit-inner-spin-button,
+	input[type=number]::-webkit-outer-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+
+	#calc-container {
+		max-width: 650px;
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 20px;
+	}
+
+	.container {
+		padding: 0;
+	}
+
+	.form-group {
+		margin-bottom: 0;
+	}
+
+	.form-group label {
+		color: #0a71ae;
+		margin-bottom: 0;
+		font-size: 12px;
+		text-transform: uppercase;
+	}
+
+	/*.card-main .card-header {
+		background-color: #022249;
+		color: #fff;
+	}*/
+
+	.cardprofit .card-header {
+		background-color: #2a9584;
+		color: #fff;
+	}
+
+	.form-exchange,
+	.form-bookmaker,
+	.form-partlay,
+	.form-gray,
+	.form-results,
+	.form-green,
+	.form-red {
+		margin-bottom: 10px;
+		padding: 10px;
+		border-radius: 5px;
+		border-style: solid;
+		border-width: 1px;
+	}
+
+	/*.form-bookmaker {
+		background-color: #d7ecfa;
+		border-color: #84c4f1;
+	}
+
+	.form-exchange {
+		background-color: #fddee5;
+		border-color: #fbafbf;
+	}*/
+
+	.form-gray {
+		background-color: #eee;
+		border-color: #ccc;
+	}
+
+	.form-results {
+		border-style: none;
+		padding: 15px;
+	}
+
+	.form-green {
+		background-color: #dff0d8;
+		border-color: #28a745;
+		color: #3c763d;
+	}
+
+	.form-red {
+		background-color: #f2dede;
+		border-color: #dc3545;
+		color: #a94442;
+	}
+
+	.om-btn-primary,
+	.om-btn-primary:focus {
+		color: #fff;
+		background-color: #2a9584;
+		-webkit-box-shadow: 0 2px 0 0 #31645c;
+		-moz-box-shadow: 0 2px 0 0 #31645c;
+		box-shadow: 0 2px 0 0 #31645c;
+	}
+
+	.om-btn-primary:hover:not([disabled]) {
+		background-color: #31645c;
+		color: #fff;
+	}
+
+	.om-btn-primary:disabled {
+		color: #c5ece7;
+		opacity: .55;
+	}
+
+	.om-btn-info,
+	.om-btn-info:focus {
+		color: #fff;
+		background-color: #0a71ae;
+		-webkit-box-shadow: 0 2px 0 0 #145372;
+		-moz-box-shadow: 0 2px 0 0 #145372;
+		box-shadow: 0 2px 0 0 #145372;
+	}
+
+	.om-btn-info:hover:not([disabled]) {
+		background-color: #145372;
+		color: #fff;
+	}
+
+	.om-btn-info:disabled {
+		color: #b5dbf2;
+		opacity: .55;
+	}
+
+	.om-btn-white,
+	.om-btn-White:focus {
+		color: #022249 !important;
+		background-color: #fff !important;
+		border: 1px solid #656f79;
+		-webkit-box-shadow: 0 2px 0 0 #656f79;
+		-moz-box-shadow: 0 2px 0 0 #656f79;
+		box-shadow: 0 2px 0 0 #656f79;
+	}
+
+	.om-btn-white:hover:not([disabled]) {
+		background-color: #ddd !important
+	}
+
+	.om-btn-white:disabled {
+		color: #ccc !important;
+		cursor: default;
+	}
+
+	.resultValue {
+		font-weight: 700;
+		font-size: 1.5rem;
+		vertical-align: middle;
+	}
+
+	.resultsimple_title {
+		line-height: 30px;
+	}
+
+	.profit,
+	.loss {
+		font-weight: 700;
+	}
+
+	.profit {
+		color: green;
+	}
+
+	.loss {
+		color: #c00;
+	}
+
+	.back {
+		color: #84c4f1;
+	}
+
+	.lay {
+		color: #fbafbf;
+	}
+
+	.disabled {
+		background-color: #eee !important
+	}
+
+	.backbg {
+		background-color: #84c4f1;
+	}
+
+	.laybg {
+		background-color: #fbafbf;
+	}
+
+	.neutralbg {
+		background-color: #eee;
+	}
+
+	.layBadge {
+		background-color: #fddee5;
+		border-color: #fbafbf;
+		border-style: solid;
+		border-width: 1px;
+		padding: 4px;
+		font-size: 14px;
+	}
+
+	.backBadge {
+		background-color: #d7ecfa;
+		border-color: #84c4f1;
+		border-style: solid;
+		border-width: 1px;
+		padding: 4px;
+		font-size: 14px;
+	}
+
+	.div-table-header {
+		text-align: left;
+		padding-top: 5px;
+		padding-bottom: 5px;
+	}
+
+	.div-table-data {
+		padding-top: 5px;
+		padding-bottom: 5px;
+		font-weight: 700;
+	}
+
+	.div-table-toprow {
+		border-style: solid;
+		border-width: 1px;
+		border-color: #d9d9d9;
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+	}
+
+	.div-table-innerrow {
+		border-style: solid;
+		border-width: 1px;
+		border-color: #d9d9d9;
+		border-top-style: none;
+	}
+
+	.div-table-bottomrow {
+		border-style: solid;
+		border-width: 1px;
+		border-color: #d9d9d9;
+		border-top-style: none;
+		border-bottom-left-radius: 5px;
+		border-bottom-right-radius: 5px;
+	}
+
+	.hidden {
+		display: none;
+	}
+
+	.om-tooltip {
+		position: relative;
+		display: inline-block;
+		border-bottom: 1px dotted #000;
+	}
+
+	.om-tooltip .om-tooltiptext {
+		visibility: hidden;
+		width: 120px;
+		background-color: #000;
+		color: #fff;
+		text-align: center;
+		padding: 5px 0;
+		border-radius: 6px;
+		position: absolute;
+		z-index: 1;
+		top: -5px;
+		right: 105%;
+	}
+
+	.om-tooltip:hover .om-tooltiptext {
+		visibility: visible;
+	}
+	</style>
+</head>
+<body onload="pageLoad();">
+	<form name="form1" id="form1">
+		<div class="container">
+			<div id="calc-container">
+				<div class="card card-main">
+					<div id="header" class="card-header">
+						<h2>Matched betting calculator</h2>
+					</div>
+					<div class="card-body">
+						<div class="row mb-3">
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label for="ddlBatType">Bet Type</label>
+									<select id="ddlBetType" class="form-control" onchange="updateLay()">
+										<option value="Normal">Normal</option>
+										<option value="SNR">Free Bet (SNR)</option>
+										<option value="SR">Free Bet (SR)</option>
+										<option value="RiskFree">Risk Free</option>
+									</select>
+								</div>
+							</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label for="ddlMode">Mode</label>
+								<select id="ddlMode" class="form-control" onchange="updateLay()">
+									<option value="SIMPLE">Simple</option>
+									<option value="ADVANCED">Advanced</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="form-bookmaker">
+						<div class="form-row">
+							<div class="col-sm-4 col-6">
+								<div class="form-group">
+									<label for="txtbookiestake">Back Stake</label>
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text">&pound;</span>
+										</div>
+										<input type="number" step="0.01" onmouseup="this.select();" onkeyup="updateLay()" onchange="updateLay()" tabindex="1" class="form-control" id="txtBookieStake" name="txtBookieStake" autocomplete="off" value="" required="required" />
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-4 col-6">
+								<div class="form-group">
+									<label for="txtbookieodds">Back Odds</label>
+									<input type="number" step="0.01" onmouseup="this.select();" class="form-control" onkeyup="updateLay()" onchange="updateLay()" tabindex="2" id="txtBookieOdds" autocomplete="off" value="" />
+								</div>
+							</div>
+							<div class="col-sm-4 col-6">
+								<div class="form-group">
+									<label for="txtBookieComm">Bookie Commission</label>
+									<div class="input-group">
+										<input type="number" step="0.01" onmouseup="this.select();" class="form-control" onkeyup="updateLay()" tabindex="5" onchange="updateLay()" id="txtBookieComm" autocomplete="off" value="0" />
+										<div class="input-group-append">
+											<span class="input-group-text">%</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div id="divRiskFreeInput" class="form-row " style="display:none">
+							<div class="col-6 col-sm-4">
+								<div class="form-group">
+									<label for="txtfreebetaward">Free Bet Award</label>
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text">&pound;</span>
+										</div>
+										<input type="number" step="0.01" onmouseup="this.select();" onkeyup="updateLay()" onchange="updateLay()" TabIndex="5" class="form-control" ID="txtFreeBetAward" autocomplete="off" value="" />
+									</div>
+								</div>
+							</div>
+							<div class="col-6 col-sm-4">
+								<div class="form-group">
+									<label for="txtFreeBetRetention">Free Bet Retention</label>
+									<div class="input-group">
+										<input type="number" step="0.01" onmouseup="this.select();" onkeyup="updateLay()" onchange="updateLay()" TabIndex="6" class="form-control" ID="txtFreeBetRetention" autocomplete="off" value="80" />
+										<div class="input-group-append">
+											<span class="input-group-text">%</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+<div class="form-exchange">
+  <div class="form-row justify-content-end">
+    <div class="col-sm-4 col-6">
+      <div class="form-group">
+        <label for="txtExchangeodds">Lay Odds</label>
+        <input type="number" step="0.01" onmouseup="this.select();" class="form-control" onkeyup="updateLay()" onchange="updateLay()" tabindex="3" id="txtExchangeOdds" autocomplete="off" value="" />
+      </div>
+    </div>
+    <div class="col-sm-4 col-6">
+      <div class="form-group">
+        <label for="txtExchangeComm">Lay Commission</label>
+        <div class="input-group">
+          <input type="number" step="0.01" onmouseup="this.select();" class="form-control" onkeyup="updateLay()" onchange="updateLay()" tabindex="4" id="txtExchangeComm" autocomplete="off" value="0" />
+          <div class="input-group-append">
+            <span class="input-group-text">%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="divPartLay" class="form-exchange" style="display:none">
+  <div class="form-row">
+    <div class="col-4">
+      <div class="form-group">
+        <label for="txtPartLayStake1">Part lay stake</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">&pound;</span>
+          </div>
+          <input type="number" step="0.01" onmouseup="this.select();" onkeyup="updateLay()" onchange="updateLay()" tabindex="5" class="form-control" id="txtPartLayStake1" autocomplete="off" value="" required="required" />
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="form-group">
+        <label for="txtPartLayOdds1">Part Lay Odds</label>
+        <input type="number" step="0.01" onmouseup="this.select();" class="form-control" onkeyup="updateLay()" onchange="updateLay()" tabindex="6" id="txtPartLayOdds1" autocomplete="off" value="" />
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-4">
+      <div class="form-group">
+        <label for="txtPartLayStake2">Part lay stake</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">&pound;</span>
+          </div>
+          <input type="number" step="0.01" onmouseup="this.select();" onkeyup="updateLay()" onchange="updateLay()" tabindex="7" class="form-control" id="txtPartLayStake2" autocomplete="off" value="" required="required" />
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="form-group">
+        <label for="txtPartLayOdds2">Part Lay Odds</label>
+        <input type="number" step="0.01" onmouseup="this.select();" class="form-control" onkeyup="updateLay()" onchange="updateLay()" tabindex="8" id="txtPartLayOdds2" autocomplete="off" value="" />
+      </div>
+    </div>
+  </div>
+</div>
+<div id="divResult_simple" style="display: none;">
+  <div class="text-center form-exchange mb-2 resultsimple_title"> You could lay <span class="resultValue" ID="layValue"></span> at odds of <span class="resultValue" ID="layOdds"></span> and your Liability will be <span class="resultValue" ID="liability"></span>
+  </div>
+  <h4 Class="text-center"> Your profit will be <span ID="lblProfit"></span>
+  </h4>
+  <div id="divResult_simple_breakdown" style="display: none;">
+    <div class="profitLossBreakdown row" id="divProfitLossBreakdown">
+      <div class="col-md-6 text-center ">
+        <div class="form-bookmaker">
+          <strong>If Bookmaker (Back) bet wins</strong>
+          <div class="row">
+            <div class="col-6 text-left">Bookmaker</div>
+            <div class="col-6 text-right">
+              <span ID="lblBookieWin_bookie"></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6 text-left">Exchange</div>
+            <div class="col-6 text-right">
+              <span ID="lblBookieWin_exchange"></span>
+            </div>
+          </div>
+          <div class="row" id="BookieWin_freebet">
+            <div class="col-6 text-left">Free Bet</div>
+            <div class="col-6 text-right">
+              <span ID="lblBookieWin_freebet"></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6 text-left">Total</div>
+            <div class="col-6 text-right">
+              <span ID="lblBackWin_total"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 text-center ">
+        <div class="form-exchange">
+          <strong>If Exchange (Lay) bet wins</strong>
+          <div class="row">
+            <div class="col-6 text-left">Bookmaker</div>
+            <div class="col-6 text-right">
+              <span ID="lblExchangeWin_bookie"></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6 text-left">Exchange</div>
+            <div class="col-6 text-right">
+              <span ID="lblExchangeWin_exchange"></span>
+            </div>
+          </div>
+          <div class="row" id="ExchangeWin_freebet">
+            <div class="col-6 text-left">Free Bet</div>
+            <div class="col-6 text-right">
+              <span ID="lblExchangeWin_freebet"></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6 text-left">Total</div>
+            <div class="col-6 text-right">
+              <span ID="lblExchangeWin_total"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="divResult_advanced" class="text-center" style="display: none;">
+  <h4>Advanced Profit Options</h4>
+  <div class="row">
+    <div class="col-sm-4 ">
+      <strong>Underlay</strong>
+      <br /> You could lay <span ID="underlayLay"></span>
+      <br /> Liability will be <span ID="underlayLiability"></span>
+      <br /> Bookmaker bet wins <span ID="underlayBookieWin"></span>
+      <br /> Exchange lay wins <span ID="underlayExchangeWin"></span>
+      <br />
+    </div>
+    <div class="col-sm-4 ">
+      <strong>Standard</strong>
+      <br /> You could lay <span ID="standardLay"></span>
+      <br /> Liability will be <span ID="standardLiability"></span>
+      <br /> Bookmaker bet wins <span ID="standardBookieWin"></span>
+      <br /> Exchange lay wins <span ID="standardExchangeWin"></span>
+      <br />
+    </div>
+    <div class="col-sm-4 ">
+      <strong>Overlay</strong>
+      <br /> You could lay <span ID="overlayLay"></span>
+      <br /> Liability will be <span ID="overlayLiability"></span>
+      <br /> Bookmaker bet wins <span ID="overlayBookieWin"></span>
+      <br /> Exchange lay wins <span ID="overlayExchangeWin"></span>
+      <br />
+    </div>
+  </div>
+</div>
+<div id="divResult_custom" class="text-center mt-3">
+  <h4>Custom</h4>
+  <div class="row">
+    <div class="col-sm-6 "> You could Lay <span id="customLay"></span>
+      <br /> Liability will be <span id="customLiability"></span>
+    </div>
+    <div class="col-sm-6 "> Bookmaker bet wins <span id="customBookieWin"></span>
+      <br /> Exchange Lay wins <span id="customExchangeWin"></span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="form-group">
+        <label for="txtCustomMin">Min:</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">&pound;</span>
+          </div>
+          <input type="number" step="0.01" onmouseup="this.select();" onkeyup="updateLay(0)" class="form-control" id="txtCustomMin" name="txtCustomMin" autocomplete="off" value="5" />
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label class="mb-3" for="txtCustomMin">Custom amount</label>
+        <div id="slider"></div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="form-group">
+        <label for="txtCustomMax">Max:</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">&pound;</span>
+          </div>
+          <input type="number" step="0.01" onmouseup="this.select();" onkeyup="updateLay(0)" class="form-control" id="txtCustomMax" name="txtCustomMax" autocomplete="off" value="5" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+</div>
+<div class="row">
+  <div class="col-6 text-left">
+    <label for="chkPartLay">Part lays</label>
+    <input type="checkbox" id="chkPartLay" onchange="showPartLay();" data-toggle="toggle" data-on="Show" data-size="sm" data-off="Hide" data-onstyle="success" data-offstyle="secondary">
+  </div>
+  <div class="col-6 text-right">
+    <button type="button" id="calcButton" onclick="updateLay();" class="btn btn-sm om-btn-info">Calculate</button>
+  </div>
+</div>
+
+</div>
+</div>
+</div>
+<br />
+<br />
+</div>
+</form>
+
+
+<script>
+
+function pageLoad() {
+
+    //	var x = readCookie('calcMode')
+    //  if (x) {
+    document.getElementById('ddlMode').value = 'SIMPLE' // readCookie('calcMode');
+    // }
+    // else {
+    //save default cookie
+    //     createCookie('calcMode', 'SIMPLE', 365);
+    // }
+
+    $(document).ready(function() {
+        $('#divPartLay').removeClass('hidden');
+        $('#divPartLay').slideUp(0);
+
+        //Can set default values using querystring (case sensitive!!!)
+        if (getParameterByName('backStake') !== '') {
+            document.getElementById('txtBookieStake').value = getParameterByName('backStake');
+        }
+        if (getParameterByName('backOdds') !== '') {
+            document.getElementById('txtBookieOdds').value = getParameterByName('backOdds');
+        }
+        if (getParameterByName('layOdds') !== '') {
+            document.getElementById('txtExchangeOdds').value = getParameterByName('layOdds');
+        }
+        if (getParameterByName('layComm') === null) {
+            //document.getElementById('txtExchangeComm').value = 5;
+        } else {
+            if (getParameterByName('layComm') !== '') {
+                document.getElementById('txtExchangeComm').value = getParameterByName('layComm');
+            }
+        }
+
+        updateLay();
+        $("#txtBookieStake").focus();
+
+    });
+
+}
+
+function round(value, decimals) {
+    return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals).toFixed(decimals);
+}
+
+function getQuerystring(key, default_) {
+    if (default_ == null) default_ = "";
+    key = key.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+    var regex = new RegExp("[\\?&]" + key + "=([^&#]*)");
+    var qs = regex.exec(window.location.href);
+    if (qs == null)
+        return default_;
+    else
+        return qs[1];
+}
+
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+function eraseCookie(name) {
+    createCookie(name, "", -1);
+}
+
+function createCookie(name, value, days) {
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        var expires = "; expires=" + date.toGMTString();
+    } else var expires = "";
+    document.cookie = name + "=" + value + expires + "; path=/";
+}
+
+function readCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+}
+
+function setTextContent(element, text) {
+    $('#' + element).text(text);
+
+    try {
+        document.getElementById('hf_' + element).value = text;
+    } catch (err) {}
+}
+
+function setTextValue(element, textValue, overClass, underClass, curr, posPrefix, negPrefix) {
+    var sValue
+
+    //Changes currency to be at the end, not the start as REquested by Jon Ticket #8263
+    var ReverseCurr = ''
+    if (curr == 'kr') {
+        ReverseCurr = 'kr'
+        curr = ''
+    }
+
+    sValue = curr + formatCurrency(textValue) + ReverseCurr;
+    if (curr == 'kr') {
+        sValue = sValue.replace(ReverseCurr + '-', negPrefix + ReverseCurr);
+    } else {
+        sValue = sValue.replace(curr + '-', negPrefix + curr);
+    }
+    if (sValue.indexOf('-') < 0) {
+        sValue = posPrefix + sValue;
+    }
+
+    $('#' + element).text(sValue);
+    try {
+        document.getElementById('hf_' + element).value = sValue;
+    } catch (err) {}
+
+    if (parseFloat(textValue) >= 0) {
+        $('#' + element).addClass(overClass);
+        $('#' + element).removeClass(underClass);
+    } else {
+        $('#' + element).addClass(underClass);
+        $('#' + element).removeClass(overClass);
+    }
+}
+
+function formatCurrency(num) {
+    num = isNaN(num) || num === '' || num === null ? 0.00 : num;
+    var curr = "£";
+    if (curr == 'kr') {
+        return parseFloat(num).toFixed(2).replace('.', ',');
+    } else {
+        return parseFloat(num).toFixed(2);
+    }
+}
+
+function replaceAll(str, find, replace) {
+    return str.replace(new RegExp(find, 'g'), replace);
+}
+
+function showPartLay(resetCustomMinMaxValues) {
+
+    if ($('#chkPartLay').prop('checked') == 1) {
+        $('#divPartLay').slideDown(600);
+    } else {
+        $('#divPartLay').slideUp(600);
+    }
+}
+
+function updateLay(resetCustomMinMaxValues) {
+
+    //Custom minMax values
+    if (typeof resetCustomMinMaxValues === 'undefined') {
+        resetCustomMinMaxValues = 1;
+    }
+
+
+    //Set values
+    var backStake = replaceAll(document.getElementById('txtBookieStake').value, ',', '.');
+    var backOdds = replaceAll(document.getElementById('txtBookieOdds').value, ',', '.');
+    var layOdds = replaceAll(document.getElementById('txtExchangeOdds').value, ',', '.');
+    var layComm = replaceAll(document.getElementById('txtExchangeComm').value, ',', '.');
+    var backComm = replaceAll(document.getElementById('txtBookieComm').value, ',', '.');
+    var curr = "£";
+    var calcMode = document.getElementById('ddlMode').value;
+    var backReturn
+    var backProfit
+    var totalBackStake = backStake
+    var SNRReturn
+    var betType = document.getElementById('ddlBetType').value;
+    try {
+        document.getElementById('hf_ddlBetType').value = betType;
+    } catch (e) {}
+    var _return
+    var _SNR
+    var _SR = parseFloat(backStake);
+    var _type
+
+    if (betType == "SNR") {
+        _return = 2;
+        _SNR = backStake;
+        _SR = 0;
+    } else {
+        _return = 1;
+        _SNR = 0;
+    }
+
+    if (betType == "SNR") {
+        _type = 3;
+    } else if (betType == "SR") {
+        _type = 2;
+    } else {
+        _type = 1;
+    }
+
+    //Risk free mode
+    var _riskFree;
+    if (betType == "RiskFree") {
+        _type = 4;
+        $("#divRiskFreeInput").show();
+        $(".col-profit-breakdown-desc").removeClass("col-sm-6").addClass("col-sm-4");
+        $(".col-profit-breakdown-freebet").show();
+        _riskFree = $("#txtFreeBetAward").val() * $("#txtFreeBetRetention").val() / 100;
+    } else {
+        $("#divRiskFreeInput").hide();
+        $(".col-profit-breakdown-desc").removeClass("col-sm-4").addClass("col-sm-6");
+        $(".col-profit-breakdown-freebet").hide();
+        _riskFree = 0;
+    }
+
+    //Hide results if we do not have all data
+    if (backStake == '' | layOdds == '' | backOdds == '' | layComm == '') {
+        $("#divResult_advanced").hide();
+        $("#divResult_custom").hide();
+        $("#divResult_simple").hide();
+        $("#divResult_simple_breakdown").hide();
+        return;
+    }
+
+    //Part lay values
+    var partLayLayReturn1 = 0;
+    var partLayLiability1 = 0;
+    var partLayBackStake1 = 0;
+    var partLayBackReturn1 = 0;
+    var partLayLayReturn2 = 0;
+    var partLayLiability2 = 0;
+    var partLayBackStake2 = 0;
+    var partLayBackReturn2 = 0;
+    var partLayOdds1 = document.getElementById('txtPartLayOdds1').value;
+    var partLayStake1 = document.getElementById('txtPartLayStake1').value;
+    var partLayOdds2 = document.getElementById('txtPartLayOdds2').value;
+    var partLayStake2 = document.getElementById('txtPartLayStake2').value;
+    var partlayliab = partLayStake1 * (partLayOdds1 - 1) + partLayStake2 * (partLayOdds2 - 1);
+    var backStakeMatched = 0
+    var partlayliab
+    //Standard
+    var s_lay
+    var s_backreturnpure
+    var s_liability
+    var s_profitwin
+    //Underlay
+    var u_lay
+    var u_liability
+    var u_profitwin
+    var u_profitlose
+    //Overlay
+    var o_lay
+    var o_liability
+    var o_profitwin
+    var o_profitlose
+
+    if (partLayOdds1 == '') {
+        partLayOdds1 = 0;
+    }
+    if (partLayStake1 == '') {
+        partLayStake1 = 0;
+    }
+    if (partLayOdds2 == '') {
+        partLayOdds2 = 0;
+    }
+    if (partLayStake2 == '') {
+        partLayStake2 = 0;
+    }
+
+    var backCommMode = "profit";
+    if ($("#blBackTax").val() == 1) {
+        backCommMode = "return";
+    }
+
+    //calculate straight lay
+    if (backCommMode === "profit") {
+        s_backreturn = ((backOdds - 1) * backStake * (1 - (backComm / 100))) + _SR - (partLayStake1 * (partLayOdds1 - layComm / 100)) - (partLayStake2 * (partLayOdds2 - layComm / 100)) - _riskFree;;
+    } else {
+        s_backreturn = ((backOdds - 1) * backStake - (backStake * (backOdds) * (backComm / 100))) + _SR - (partLayStake1 * (partLayOdds1 - layComm / 100)) - (partLayStake2 * (partLayOdds2 - layComm / 100)) - _riskFree;
+    }
+
+    backOdds = parseFloat(backOdds).toFixed(5);
+    backStake = parseFloat(backStake).toFixed(2);
+    backComm = parseFloat(backComm).toFixed(2);
+    _return = parseFloat(_return).toFixed(2);
+    _SNR = parseFloat(_SNR).toFixed(2);
+
+    //console.log(backOdds);
+    //console.log(backStake);
+    //console.log(backComm);
+    //console.log(_return);
+    //console.log(_SNR);
+
+    if (backCommMode === "profit") {
+        s_backreturnpure = ((backOdds - 1) * backStake * (1 - (backComm / 100))) + _SR - _riskFree;
+    } else {
+        s_backreturnpure = ((backOdds - 1) * backStake - (backStake * (backOdds) * (backComm / 100))) + _SR - _riskFree;
+    }
+
+    s_lay = round(s_backreturn / (layOdds - layComm / 100), 2);
+    s_lay = parseFloat(s_lay);
+    partLayStake1 = parseFloat(partLayStake1);
+    partLayStake2 = parseFloat(partLayStake2);
+    s_liability = s_lay * (layOdds - 1);
+    s_profitwin = (s_backreturnpure - s_liability - partlayliab) - backStake;
+    s_profitlose = ((s_lay + partLayStake1 + partLayStake2) * (100 - layComm) / 100) - backStake;
+
+    //calculate under lay
+    if (s_profitwin < 0) {
+        u_liability = s_backreturnpure - partlayliab - backStake;
+        u_lay = round(u_liability / (layOdds - 1), 2);
+        u_lay = parseFloat(u_lay);
+        u_profitwin = s_backreturnpure - backStake - u_liability - partlayliab;
+        u_profitlose = (partLayStake1 + partLayStake2 + u_lay) * (1 - layComm / 100) - backStake;
+    } else {
+        u_lay = round(backStake / (1 - layComm / 100) - partLayStake1 - partLayStake2, 2);
+        u_lay = parseFloat(u_lay);
+        u_liability = u_lay * (layOdds - 1);
+        u_profitwin = s_backreturnpure - backStake - u_liability - partlayliab;
+        u_profitlose = (partLayStake1 + partLayStake2 + u_lay) * (1 - layComm / 100) - backStake;
+    }
+
+
+    //calculate over lay
+    if (s_profitwin < 0) {
+        o_lay = round(backStake / (1 - layComm / 100) - partLayStake1 - partLayStake2, 2);
+        o_lay = parseFloat(o_lay);
+        o_liability = o_lay * (layOdds - 1);
+        o_profitwin = s_backreturnpure - backStake - o_liability - partlayliab;
+        o_profitlose = (partLayStake1 + partLayStake2 + o_lay) * (1 - layComm / 100) - backStake;
+    } else {
+        o_liability = s_backreturnpure - partlayliab - backStake;
+        o_lay = round(o_liability / (layOdds - 1), 2);
+        o_lay = parseFloat(o_lay);
+        o_profitwin = s_backreturnpure - backStake - o_liability - partlayliab;
+        o_profitlose = (partLayStake1 + partLayStake2 + o_lay) * (1 - layComm / 100) - backStake;
+    }
+
+    //adjust profit if bet is SR
+    if (betType == "SR") {
+        s_profitwin = parseFloat(s_profitwin) + parseFloat(backStake);
+        u_profitwin = parseFloat(u_profitwin) + parseFloat(backStake);
+        o_profitwin = parseFloat(o_profitwin) + parseFloat(backStake);
+        s_profitlose = parseFloat(backStake) + parseFloat(s_profitlose);
+        u_profitlose = parseFloat(backStake) + parseFloat(u_profitlose);
+        o_profitlose = parseFloat(backStake) + parseFloat(o_profitlose);
+
+        //adjust profit if bet is SNR
+    } else if (betType == "SNR") {
+        s_profitwin = parseFloat(backStake) + parseFloat(s_profitwin);
+        u_profitwin = parseFloat(backStake) + parseFloat(u_profitwin);
+        o_profitwin = parseFloat(backStake) + parseFloat(o_profitwin);
+        s_profitlose = parseFloat(backStake) + parseFloat(s_profitlose);
+        u_profitlose = parseFloat(backStake) + parseFloat(u_profitlose);
+        o_profitlose = parseFloat(backStake) + parseFloat(o_profitlose);
+
+        //adjust profit if bet is Risk Free
+    } else if (betType == "RiskFree") {
+        s_profitwin = parseFloat(_riskFree) + parseFloat(s_profitwin);
+        u_profitwin = parseFloat(_riskFree) + parseFloat(u_profitwin);
+        o_profitwin = parseFloat(_riskFree) + parseFloat(o_profitwin);
+        s_profitlose = parseFloat(_riskFree) + parseFloat(s_profitlose);
+        u_profitlose = parseFloat(_riskFree) + parseFloat(u_profitlose);
+        o_profitlose = parseFloat(_riskFree) + parseFloat(o_profitlose);
+    }
+
+    console.log('s_profitlose:' + s_profitlose);
+    console.log('s_profitwin:' + s_profitwin);
+
+
+    //Changes currency to be at the end
+    var ReverseCurr = ''
+    if (curr == 'kr') {
+        ReverseCurr = 'kr'
+        curr = ''
+    }
+
+    // SIMPLE FIELDS
+    setTextContent(("layValue"), curr + formatCurrency(s_lay) + ReverseCurr);
+    setTextContent(("liability"), curr + formatCurrency(s_liability) + ReverseCurr);
+    setTextContent(("bookieWin"), curr + formatCurrency(s_profitwin) + ReverseCurr);
+    setTextContent(("exchangeWin"), curr + formatCurrency(s_profitlose) + ReverseCurr);
+    setTextContent(("layOdds"), layOdds);
+    if (parseFloat(s_profitlose) < parseFloat(s_profitwin)) {
+        setTextValue(("lblProfit"), s_profitlose, 'profit', 'loss', curr, '', '-');
+    } else {
+        setTextValue(("lblProfit"), s_profitwin, 'profit', 'loss', curr, '', '-');
+    }
+
+    //SET ADVANCED FIELDS
+    setTextContent(("standardLay"), curr + formatCurrency(s_lay) + ReverseCurr);
+    setTextContent(("standardLiability"), curr + formatCurrency(s_liability) + ReverseCurr);
+    setTextContent(("standardBookieWin"), curr + formatCurrency(s_profitwin) + ReverseCurr);
+    setTextContent(("standardExchangeWin"), curr + formatCurrency(s_profitlose) + ReverseCurr);
+
+
+    //SET UNDERLAY FIELDS
+    setTextContent(("underlayLay"), curr + formatCurrency(u_lay) + ReverseCurr);
+    setTextContent(("underlayLiability"), curr + formatCurrency(u_liability) + ReverseCurr);
+    setTextContent(("underlayBookieWin"), curr + formatCurrency(u_profitwin) + ReverseCurr);
+    setTextContent(("underlayExchangeWin"), curr + formatCurrency(u_profitlose) + ReverseCurr);
+
+    //SET OVERLAY FIELDS
+    setTextContent(("overlayLay"), curr + formatCurrency(o_lay) + ReverseCurr);
+    setTextContent(("overlayLiability"), curr + formatCurrency(o_liability) + ReverseCurr);
+    setTextContent(("overlayBookieWin"), curr + formatCurrency(o_profitwin) + ReverseCurr);
+    setTextContent(("overlayExchangeWin"), curr + formatCurrency(o_profitlose) + ReverseCurr);
+
+    document.getElementById("divResult_simple").style.visibility = 'visible';
+    document.getElementById("divResult_simple_breakdown").style.visibility = 'visible';
+
+    //SET SLIDER FIELDS
+    setTextContent(("customLay"), curr + formatCurrency(s_lay) + ReverseCurr);
+    setTextContent(("customLiability"), curr + formatCurrency(s_liability) + ReverseCurr);
+    setTextContent(("customBookieWin"), curr + formatCurrency(s_profitwin) + ReverseCurr);
+    setTextContent(("customExchangeWin"), curr + formatCurrency(s_profitlose) + ReverseCurr);
+
+
+    switch (calcMode) {
+        case 'SIMPLE':
+            $("#divResult_advanced").hide();
+            $("#divResult_custom").hide();
+            $("#divResult_simple").show();
+            $("#divResult_simple_breakdown").show();
+
+            break;
+        case 'ADVANCED':
+        case 'EX2EX':
+            $("#divResult_advanced").show();
+            $("#divResult_custom").show();
+            $("#divResult_simple").hide();
+            $("#divResult_simple_breakdown").hide();
+            break;
+    }
+
+    //STYLE FIELDS
+    if (o_profitwin.toFixed(2) >= 0) {
+        document.getElementById("overlayBookieWin").className = 'profit';
+    } else {
+        document.getElementById("overlayBookieWin").className = 'loss';
+    }
+
+    if (o_profitlose.toFixed(2) >= 0) {
+        document.getElementById("overlayExchangeWin").className = 'profit';
+    } else {
+        document.getElementById("overlayExchangeWin").className = 'loss';
+    }
+
+    if (u_profitwin.toFixed(2) >= 0) {
+        document.getElementById("underlayBookieWin").className = 'profit';
+    } else {
+        document.getElementById("underlayBookieWin").className = 'loss';
+    }
+
+    if (u_profitlose.toFixed(2) >= 0) {
+        document.getElementById("underlayExchangeWin").className = 'profit';
+    } else {
+        document.getElementById("underlayExchangeWin").className = 'loss';
+    }
+
+    if (s_profitwin >= 0) {
+        document.getElementById("standardBookieWin").className = 'profit';
+    } else {
+        document.getElementById("standardBookieWin").className = 'loss';
+    }
+    if (s_profitlose >= 0) {
+        document.getElementById("standardExchangeWin").className = 'profit';
+    } else {
+        document.getElementById("standardExchangeWin").className = 'loss';
+    }
+
+    //Set Profit Summary fields
+    $("#lblExchangeWin_freebet").text('');
+    $("#BookieWin_freebet").hide();
+    $("#ExchangeWin_freebet").hide();
+    switch (betType) {
+        case 'Normal':
+            setTextValue(("lblBookieWin_bookie"), s_backreturnpure - backStake, 'profit', 'loss', curr, '+', '-');
+            setTextValue(("lblExchangeWin_bookie"), -backStake, 'profit', 'loss', curr, '+', '-');
+            break;
+        case 'SNR':
+            setTextValue(("lblBookieWin_bookie"), s_backreturnpure, 'profit', 'loss', curr, '+', '-');
+            setTextValue(("lblExchangeWin_bookie"), 0, 'profit', 'loss', curr, '+', '-');
+            break;
+        case 'SR':
+            setTextValue(("lblBookieWin_bookie"), s_backreturnpure, 'profit', 'loss', curr, '+', '-');
+            setTextValue(("lblExchangeWin_bookie"), 0, 'profit', 'loss', curr, '+', '-');
+            break;
+        case 'RiskFree':
+            setTextValue(("lblBookieWin_bookie"), s_backreturnpure - backStake + _riskFree, 'profit', 'loss', curr, '+', '-');
+            setTextValue(("lblExchangeWin_bookie"), -backStake, 'profit', 'loss', curr, '+', '-');
+            setTextValue(("lblExchangeWin_freebet"), _riskFree, 'profit', 'loss', curr, '+', '-');
+            $("#BookieWin_freebet").show();
+            $("#ExchangeWin_freebet").show();
+
+            break;
+    }
+
+    var layReturn = s_lay * (100 - layComm) / 100;
+
+    setTextValue(("lblBookieWin_exchange"), -s_liability, 'profit', 'loss', curr, '+', '-');
+    setTextValue(("lblExchangeWin_exchange"), layReturn, 'profit', 'loss', curr, '+', '-');
+
+    setTextValue(("lblBackWin_total"), s_profitwin, 'profit', 'loss', curr, '', '-');
+    setTextValue(("lblExchangeWin_total"), s_profitlose, 'profit', 'loss', curr, '', '-');
+
+    //Save calculator mode
+    eraseCookie('calcMode');
+    createCookie('calcMode', calcMode, 365);
+
+    //Show correct fields
+    switch (calcMode) {
+        case 'SIMPLE':
+            $("#divResult_advanced").hide();
+            $("#divResult_custom").hide();
+            $("#divResult_simple").show();
+            $("#divResult_simple_breakdown").show();
+            break;
+        case 'ADVANCED':
+        case 'EX2EX':
+            $("#divResult_advanced").show();
+            $("#divResult_custom").show();
+            $("#divResult_simple").hide();
+            $("#divResult_simple_breakdown").hide();
+            break;
+    }
+
+    //Setup Slider
+    var customMin;
+    var customMax;
+    s_lay = parseFloat(s_lay);
+
+    if (resetCustomMinMaxValues == 1) {
+        customMin = s_lay - ((s_lay / 100) * 10);
+        customMax = s_lay + ((s_lay / 100) * 10);
+
+        customMin = customMin.toFixed(2);
+        customMax = customMax.toFixed(2);
+
+        document.getElementById("txtCustomMin").value = customMin
+        document.getElementById("txtCustomMax").value = customMax
+    } else {
+        customMin = document.getElementById("txtCustomMin").value;
+        customMax = document.getElementById("txtCustomMax").value;
+
+    }
+
+    $(function() {
+        $("#slider").slider({
+            value: s_lay,
+            min: parseFloat(customMin),
+            max: parseFloat(customMax),
+            step: 0.01,
+            slide: function(event, ui) {
+                document.getElementById("customLay").innerHTML = (formatCurrency(ui.value));
+                updateSlider();
+            }
+        });
+        //document.getElementById("amount").value = (curr + ui.value);
+
+    });
+
+    $("#calcButton").text("ReCalculate");
+
+}
+
+function updateSlider() {
+    var layliability;
+    var backStake = document.getElementById('txtBookieStake').value.replace(',', '.');
+    var backOdds = document.getElementById('txtBookieOdds').value.replace(',', '.');
+    var layOdds = document.getElementById('txtExchangeOdds').value.replace(',', '.');
+    var layComm = document.getElementById('txtExchangeComm').value.replace(',', '.');
+    var backComm = document.getElementById('txtBookieComm').value.replace(',', '.');
+    var backReturn
+    //Part lay 
+    var partLayLayReturn1 = 0;
+    var partLayLiability1 = 0;
+    var partLayBackStake1 = 0;
+    var partLayBackReturn1 = 0;
+    var partLayOdds1 = document.getElementById('txtPartLayOdds1').value.replace(',', '.');
+    var partLayStake1 = document.getElementById('txtPartLayStake1').value.replace(',', '.');
+    var partLayOdds2 = document.getElementById('txtPartLayOdds2').value.replace(',', '.');
+    var partLayStake2 = document.getElementById('txtPartLayStake2').value.replace(',', '.');
+    var partlayliab = partLayStake1 * (partLayOdds1 - 1) + partLayStake2 * (partLayOdds2 - 1);
+    var backStakeMatched = 0
+    var curr = "£";
+
+    var backCommMode = "profit";
+    if ($("#blBackTax").val() == 1) {
+        backCommMode = "return";
+    }
+
+    var betType = document.getElementById('ddlBetType').value;
+    var _return
+    var _SNR
+    var _SR = parseFloat(backStake);
+    var _type
+    var profitlose
+    var profitwin
+
+    if (betType == "SNR") {
+        _return = 2;
+        _SNR = backStake;
+        _SR = 0;
+    } else {
+        _return = 1;
+        _SNR = 0;
+    }
+
+    if (betType == "SNR") {
+        _type = 3;
+    } else if (betType == "SR") {
+        _type = 2;
+    } else {
+        _type = 1;
+    }
+
+    //Risk free mode
+    var _riskFree;
+    if (betType == "RiskFree") {
+        _type = 4;
+        $("#divRiskFreeInput").show();
+        $(".col-profit-breakdown-desc").removeClass("col-sm-6").addClass("col-sm-4");
+        $(".col-profit-breakdown-freebet").show();
+        _riskFree = $("#txtFreeBetAward").val() * $("#txtFreeBetRetention").val() / 100;
+    } else {
+        $("#divRiskFreeInput").hide();
+        $(".col-profit-breakdown-desc").removeClass("col-sm-4").addClass("col-sm-6");
+        $(".col-profit-breakdown-freebet").hide();
+        _riskFree = 0;
+    }
+
+    backOdds = parseFloat(backOdds).toFixed(5);
+    backStake = parseFloat(backStake).toFixed(2);
+    backComm = parseFloat(backComm).toFixed(2);
+    _return = parseFloat(_return).toFixed(2);
+    _SNR = parseFloat(_SNR).toFixed(2);
+
+    if (backCommMode === "profit") {
+        s_backreturnpure = ((backOdds - 1) * backStake * (1 - (backComm / 100))) + _SR - _riskFree;
+    } else {
+        s_backreturnpure = ((backOdds - 1) * backStake - (backStake * (backOdds) * (backComm / 100))) + _SR - _riskFree;
+    }
+
+    var temp1 = (backOdds * backStake);
+    var temp2 = backComm * ((backComm - _return) * backStake) / 100;
+    console.log(temp1 - temp2 - _SNR);
+
+    //Changes currency to be at the end, not the start as REquested by Jon Ticket #8263
+    var ReverseCurr = ''
+    if (curr == 'kr') {
+        ReverseCurr = 'kr'
+        curr = ''
+    }
+
+    console.log(s_backreturnpure);
+    console.log((5.4 * 25 - (5 * ((5 - 2) * 25) / 100) - 25));
+    var s = document.getElementById('customLay').innerHTML.replace(',', '.');
+    lay2 = parseFloat(s);
+    setTextContent(("customLay"), curr + formatCurrency(lay2) + ReverseCurr);
+    layliability = lay2 * (layOdds - 1);
+    setTextContent(("customLiability"), curr + formatCurrency(layliability) + ReverseCurr);
+
+    if (partLayStake1 == '') {
+        partLayStake1 = 0
+    };
+    if (partLayStake2 == '') {
+        partLayStake2 = 0
+    };
+    partLayStake1 = parseFloat(partLayStake1);
+    partLayStake2 = parseFloat(partLayStake2);
+
+    profitlose = ((partLayStake1 + partLayStake2) + lay2) * (1 - layComm / 100) - backStake;
+
+    if (_type === 4) {
+        profitlose = parseFloat(profitlose) + parseFloat(_riskFree);
+    } else if (_type !== 1) {
+        profitlose = parseFloat(profitlose) + parseFloat(backStake);
+    }
+    setTextContent(("customExchangeWin"), curr + formatCurrency(profitlose) + ReverseCurr);
+
+    s_backreturnpure = parseFloat(s_backreturnpure);
+    backStake = parseFloat(backStake);
+    partlayliab = parseFloat(partlayliab);
+    layliability = parseFloat(layliability);
+
+    profitwin = (s_backreturnpure - backStake - partlayliab) - layliability;
+    if (_type === 4) {
+        profitwin = parseFloat(profitwin) + parseFloat(_riskFree);
+    } else if (_type !== 1) {
+        profitwin = parseFloat(profitwin) + parseFloat(backStake);
+    }
+    setTextContent(("customBookieWin"), curr + formatCurrency(profitwin) + ReverseCurr);
+
+    if (profitwin >= 0) {
+        document.getElementById("customBookieWin").className = 'profit';
+    } else {
+        document.getElementById("customBookieWin").className = 'loss';
+    }
+
+    if (profitlose >= 0) {
+        document.getElementById("customExchangeWin").className = 'profit';
+    } else {
+        document.getElementById("customExchangeWin").className = 'loss';
+    }
+
+
+}
+</script>
+<script>
+/*! iFrame Resizer (iframeSizer.contentWindow.min.js) - v4.2.11 - 2020-09-09
+ *  Desc: Include this file in any page being loaded into an iframe
+ *        to force the iframe to resize to the content size.
+ *  Requires: iframeResizer.min.js on host page.
+ *  Copyright: (c) 2020 David J. Bradshaw - dave@bradshaw.net
+ *  License: MIT
+ */
+
+! function(u) {
+    if ("undefined" != typeof window) {
+        var n = !0,
+            o = 10,
+            i = "",
+            r = 0,
+            a = "",
+            t = null,
+            c = "",
+            s = !1,
+            d = {
+                resize: 1,
+                click: 1
+            },
+            l = 128,
+            f = !0,
+            m = 1,
+            h = "bodyOffset",
+            g = h,
+            p = !0,
+            v = "",
+            y = {},
+            w = 32,
+            b = null,
+            T = !1,
+            E = "[iFrameSizer]",
+            O = E.length,
+            S = "",
+            M = {
+                max: 1,
+                min: 1,
+                bodyScroll: 1,
+                documentElementScroll: 1
+            },
+            I = "child",
+            N = !0,
+            A = window.parent,
+            C = "*",
+            z = 0,
+            k = !1,
+            e = null,
+            R = 16,
+            x = 1,
+            L = "scroll",
+            F = L,
+            P = window,
+            D = function() {
+                re("onMessage function not defined")
+            },
+            j = function() {},
+            q = function() {},
+            H = {
+                height: function() {
+                    return re("Custom height calculation function not defined"), document.documentElement.offsetHeight
+                },
+                width: function() {
+                    return re("Custom width calculation function not defined"), document.body.scrollWidth
+                }
+            },
+            W = {},
+            B = !1;
+        try {
+            var J = Object.create({}, {
+                passive: {
+                    get: function() {
+                        B = !0
+                    }
+                }
+            });
+            window.addEventListener("test", ee, J), window.removeEventListener("test", ee, J)
+        } catch (e) {}
+        var U, V, K, Q, X, Y, G = Date.now || function() {
+                return (new Date).getTime()
+            },
+            Z = {
+                bodyOffset: function() {
+                    return document.body.offsetHeight + pe("marginTop") + pe("marginBottom")
+                },
+                offset: function() {
+                    return Z.bodyOffset()
+                },
+                bodyScroll: function() {
+                    return document.body.scrollHeight
+                },
+                custom: function() {
+                    return H.height()
+                },
+                documentElementOffset: function() {
+                    return document.documentElement.offsetHeight
+                },
+                documentElementScroll: function() {
+                    return document.documentElement.scrollHeight
+                },
+                max: function() {
+                    return Math.max.apply(null, ye(Z))
+                },
+                min: function() {
+                    return Math.min.apply(null, ye(Z))
+                },
+                grow: function() {
+                    return Z.max()
+                },
+                lowestElement: function() {
+                    return Math.max(Z.bodyOffset() || Z.documentElementOffset(), ve("bottom", be()))
+                },
+                taggedElement: function() {
+                    return we("bottom", "data-iframe-height")
+                }
+            },
+            $ = {
+                bodyScroll: function() {
+                    return document.body.scrollWidth
+                },
+                bodyOffset: function() {
+                    return document.body.offsetWidth
+                },
+                custom: function() {
+                    return H.width()
+                },
+                documentElementScroll: function() {
+                    return document.documentElement.scrollWidth
+                },
+                documentElementOffset: function() {
+                    return document.documentElement.offsetWidth
+                },
+                scroll: function() {
+                    return Math.max($.bodyScroll(), $.documentElementScroll())
+                },
+                max: function() {
+                    return Math.max.apply(null, ye($))
+                },
+                min: function() {
+                    return Math.min.apply(null, ye($))
+                },
+                rightMostElement: function() {
+                    return ve("right", be())
+                },
+                taggedElement: function() {
+                    return we("right", "data-iframe-width")
+                }
+            },
+            _ = (U = Te, X = null, Y = 0, function() {
+                var e = G(),
+                    t = R - (e - (Y = Y || e));
+                return V = this, K = arguments, t <= 0 || R < t ? (X && (clearTimeout(X), X = null), Y = e, Q = U.apply(V, K), X || (V = K = null)) : X = X || setTimeout(Ee, t), Q
+            });
+        te(window, "message", function(t) {
+            var n = {
+                init: function() {
+                    v = t.data, A = t.source, ae(), f = !1, setTimeout(function() {
+                        p = !1
+                    }, l)
+                },
+                reset: function() {
+                    p ? ie("Page reset ignored by init") : (ie("Page size reset by host page"), Me("resetPage"))
+                },
+                resize: function() {
+                    Oe("resizeParent", "Parent window requested size check")
+                },
+                moveToAnchor: function() {
+                    y.findTarget(i())
+                },
+                inPageLink: function() {
+                    this.moveToAnchor()
+                },
+                pageInfo: function() {
+                    var e = i();
+                    ie("PageInfoFromParent called from parent: " + e), q(JSON.parse(e)), ie(" --")
+                },
+                message: function() {
+                    var e = i();
+                    ie("onMessage called from parent: " + e), D(JSON.parse(e)), ie(" --")
+                }
+            };
+
+            function o() {
+                return t.data.split("]")[1].split(":")[0]
+            }
+
+            function i() {
+                return t.data.substr(t.data.indexOf(":") + 1)
+            }
+
+            function r() {
+                return t.data.split(":")[2] in {
+                    true: 1,
+                    false: 1
+                }
+            }
+
+            function e() {
+                var e = o();
+                e in n ? n[e]() : ("undefined" == typeof module || !module.exports) && "iFrameResize" in window || "jQuery" in window && "iFrameResize" in window.jQuery.prototype || r() || re("Unexpected message (" + t.data + ")")
+            }
+            E === ("" + t.data).substr(0, O) && (!1 === f ? e() : r() ? n.init() : ie('Ignored message of type "' + o() + '". Received before initialization.'))
+        }), te(window, "readystatechange", Ae), Ae()
+    }
+
+    function ee() {}
+
+    function te(e, t, n, o) {
+        e.addEventListener(t, n, !!B && (o || {}))
+    }
+
+    function ne(e) {
+        return e.charAt(0).toUpperCase() + e.slice(1)
+    }
+
+    function oe(e) {
+        return E + "[" + S + "] " + e
+    }
+
+    function ie(e) {
+        T && "object" == typeof window.console && console.log(oe(e))
+    }
+
+    function re(e) {
+        "object" == typeof window.console && console.warn(oe(e))
+    }
+
+    function ae() {
+        ! function() {
+            function e(e) {
+                return "true" === e
+            }
+            var t = v.substr(O).split(":");
+            S = t[0], r = u !== t[1] ? Number(t[1]) : r, s = u !== t[2] ? e(t[2]) : s, T = u !== t[3] ? e(t[3]) : T, w = u !== t[4] ? Number(t[4]) : w, n = u !== t[6] ? e(t[6]) : n, a = t[7], g = u !== t[8] ? t[8] : g, i = t[9], c = t[10], z = u !== t[11] ? Number(t[11]) : z, y.enable = u !== t[12] && e(t[12]), I = u !== t[13] ? t[13] : I, F = u !== t[14] ? t[14] : F
+        }(), ie("Initialising iFrame (" + window.location.href + ")"),
+            function() {
+                function e(e, t) {
+                    return "function" == typeof e && (ie("Setup custom " + t + "CalcMethod"), H[t] = e, e = "custom"), e
+                }
+                "iFrameResizer" in window && Object === window.iFrameResizer.constructor && (function() {
+                    var e = window.iFrameResizer;
+                    ie("Reading data from page: " + JSON.stringify(e)), Object.keys(e).forEach(ue, e), D = "onMessage" in e ? e.onMessage : D, j = "onReady" in e ? e.onReady : j, C = "targetOrigin" in e ? e.targetOrigin : C, g = "heightCalculationMethod" in e ? e.heightCalculationMethod : g, F = "widthCalculationMethod" in e ? e.widthCalculationMethod : F
+                }(), g = e(g, "height"), F = e(F, "width"));
+                ie("TargetOrigin for parent set to: " + C)
+            }(),
+            function() {
+                u === a && (a = r + "px");
+                ce("margin", function(e, t) {
+                    -1 !== t.indexOf("-") && (re("Negative CSS value ignored for " + e), t = "");
+                    return t
+                }("margin", a))
+            }(), ce("background", i), ce("padding", c),
+            function() {
+                var e = document.createElement("div");
+                e.style.clear = "both", e.style.display = "block", e.style.height = "0", document.body.appendChild(e)
+            }(), fe(), me(), document.documentElement.style.height = "", document.body.style.height = "", ie('HTML & body height set to "auto"'), ie("Enable public methods"), P.parentIFrame = {
+                autoResize: function(e) {
+                    return !0 === e && !1 === n ? (n = !0, he()) : !1 === e && !0 === n && (n = !1, de("remove"), null !== t && t.disconnect(), clearInterval(b)), Ne(0, 0, "autoResize", JSON.stringify(n)), n
+                },
+                close: function() {
+                    Ne(0, 0, "close")
+                },
+                getId: function() {
+                    return S
+                },
+                getPageInfo: function(e) {
+                    "function" == typeof e ? (q = e, Ne(0, 0, "pageInfo")) : (q = function() {}, Ne(0, 0, "pageInfoStop"))
+                },
+                moveToAnchor: function(e) {
+                    y.findTarget(e)
+                },
+                reset: function() {
+                    Ie("parentIFrame.reset")
+                },
+                scrollTo: function(e, t) {
+                    Ne(t, e, "scrollTo")
+                },
+                scrollToOffset: function(e, t) {
+                    Ne(t, e, "scrollToOffset")
+                },
+                sendMessage: function(e, t) {
+                    Ne(0, 0, "message", JSON.stringify(e), t)
+                },
+                setHeightCalculationMethod: function(e) {
+                    g = e, fe()
+                },
+                setWidthCalculationMethod: function(e) {
+                    F = e, me()
+                },
+                setTargetOrigin: function(e) {
+                    ie("Set targetOrigin: " + e), C = e
+                },
+                size: function(e, t) {
+                    Oe("size", "parentIFrame.size(" + ((e || "") + (t ? "," + t : "")) + ")", e, t)
+                }
+            }, he(), y = function() {
+                function r(e) {
+                    var t = e.getBoundingClientRect(),
+                        n = {
+                            x: window.pageXOffset !== u ? window.pageXOffset : document.documentElement.scrollLeft,
+                            y: window.pageYOffset !== u ? window.pageYOffset : document.documentElement.scrollTop
+                        };
+                    return {
+                        x: parseInt(t.left, 10) + parseInt(n.x, 10),
+                        y: parseInt(t.top, 10) + parseInt(n.y, 10)
+                    }
+                }
+
+                function n(e) {
+                    var t, n = e.split("#")[1] || e,
+                        o = decodeURIComponent(n),
+                        i = document.getElementById(o) || document.getElementsByName(o)[0];
+                    u !== i ? (t = r(i), ie("Moving to in page link (#" + n + ") at x: " + t.x + " y: " + t.y), Ne(t.y, t.x, "scrollToOffset")) : (ie("In page link (#" + n + ") not found in iFrame, so sending to parent"), Ne(0, 0, "inPageLink", "#" + n))
+                }
+
+                function e() {
+                    var e = window.location.hash,
+                        t = window.location.href;
+                    "" !== e && "#" !== e && n(t)
+                }
+
+                function t() {
+                    Array.prototype.forEach.call(document.querySelectorAll('a[href^="#"]'), function(e) {
+                        "#" !== e.getAttribute("href") && te(e, "click", function(e) {
+                            e.preventDefault(), n(this.getAttribute("href"))
+                        })
+                    })
+                }
+                y.enable ? Array.prototype.forEach && document.querySelectorAll ? (ie("Setting up location.hash handlers"), t(), te(window, "hashchange", e), setTimeout(e, l)) : re("In page linking not fully supported in this browser! (See README.md for IE8 workaround)") : ie("In page linking not enabled");
+                return {
+                    findTarget: n
+                }
+            }(), Oe("init", "Init message from host page"), j()
+    }
+
+    function ue(e) {
+        var t = e.split("Callback");
+        if (2 === t.length) {
+            var n = "on" + t[0].charAt(0).toUpperCase() + t[0].slice(1);
+            this[n] = this[e], delete this[e], re("Deprecated: '" + e + "' has been renamed '" + n + "'. The old method will be removed in the next major version.")
+        }
+    }
+
+    function ce(e, t) {
+        u !== t && "" !== t && "null" !== t && ie("Body " + e + ' set to "' + (document.body.style[e] = t) + '"')
+    }
+
+    function se(n) {
+        var e = {
+            add: function(e) {
+                function t() {
+                    Oe(n.eventName, n.eventType)
+                }
+                W[e] = t, te(window, e, t, {
+                    passive: !0
+                })
+            },
+            remove: function(e) {
+                var t = W[e];
+                delete W[e],
+                    function(e, t, n) {
+                        e.removeEventListener(t, n, !1)
+                    }(window, e, t)
+            }
+        };
+        n.eventNames && Array.prototype.map ? (n.eventName = n.eventNames[0], n.eventNames.map(e[n.method])) : e[n.method](n.eventName), ie(ne(n.method) + " event listener: " + n.eventType)
+    }
+
+    function de(e) {
+        se({
+            method: e,
+            eventType: "Animation Start",
+            eventNames: ["animationstart", "webkitAnimationStart"]
+        }), se({
+            method: e,
+            eventType: "Animation Iteration",
+            eventNames: ["animationiteration", "webkitAnimationIteration"]
+        }), se({
+            method: e,
+            eventType: "Animation End",
+            eventNames: ["animationend", "webkitAnimationEnd"]
+        }), se({
+            method: e,
+            eventType: "Input",
+            eventName: "input"
+        }), se({
+            method: e,
+            eventType: "Mouse Up",
+            eventName: "mouseup"
+        }), se({
+            method: e,
+            eventType: "Mouse Down",
+            eventName: "mousedown"
+        }), se({
+            method: e,
+            eventType: "Orientation Change",
+            eventName: "orientationchange"
+        }), se({
+            method: e,
+            eventType: "Print",
+            eventName: ["afterprint", "beforeprint"]
+        }), se({
+            method: e,
+            eventType: "Ready State Change",
+            eventName: "readystatechange"
+        }), se({
+            method: e,
+            eventType: "Touch Start",
+            eventName: "touchstart"
+        }), se({
+            method: e,
+            eventType: "Touch End",
+            eventName: "touchend"
+        }), se({
+            method: e,
+            eventType: "Touch Cancel",
+            eventName: "touchcancel"
+        }), se({
+            method: e,
+            eventType: "Transition Start",
+            eventNames: ["transitionstart", "webkitTransitionStart", "MSTransitionStart", "oTransitionStart", "otransitionstart"]
+        }), se({
+            method: e,
+            eventType: "Transition Iteration",
+            eventNames: ["transitioniteration", "webkitTransitionIteration", "MSTransitionIteration", "oTransitionIteration", "otransitioniteration"]
+        }), se({
+            method: e,
+            eventType: "Transition End",
+            eventNames: ["transitionend", "webkitTransitionEnd", "MSTransitionEnd", "oTransitionEnd", "otransitionend"]
+        }), "child" === I && se({
+            method: e,
+            eventType: "IFrame Resized",
+            eventName: "resize"
+        })
+    }
+
+    function le(e, t, n, o) {
+        return t !== e && (e in n || (re(e + " is not a valid option for " + o + "CalculationMethod."), e = t), ie(o + ' calculation method set to "' + e + '"')), e
+    }
+
+    function fe() {
+        g = le(g, h, Z, "height")
+    }
+
+    function me() {
+        F = le(F, L, $, "width")
+    }
+
+    function he() {
+        !0 === n ? (de("add"), function() {
+            var e = w < 0;
+            window.MutationObserver || window.WebKitMutationObserver ? e ? ge() : t = function() {
+                function t(e) {
+                    function t(e) {
+                        !1 === e.complete && (ie("Attach listeners to " + e.src), e.addEventListener("load", i, !1), e.addEventListener("error", r, !1), u.push(e))
+                    }
+                    "attributes" === e.type && "src" === e.attributeName ? t(e.target) : "childList" === e.type && Array.prototype.forEach.call(e.target.querySelectorAll("img"), t)
+                }
+
+                function o(e) {
+                    ie("Remove listeners from " + e.src), e.removeEventListener("load", i, !1), e.removeEventListener("error", r, !1),
+                        function(e) {
+                            u.splice(u.indexOf(e), 1)
+                        }(e)
+                }
+
+                function n(e, t, n) {
+                    o(e.target), Oe(t, n + ": " + e.target.src)
+                }
+
+                function i(e) {
+                    n(e, "imageLoad", "Image loaded")
+                }
+
+                function r(e) {
+                    n(e, "imageLoadFailed", "Image load failed")
+                }
+
+                function a(e) {
+                    Oe("mutationObserver", "mutationObserver: " + e[0].target + " " + e[0].type), e.forEach(t)
+                }
+                var u = [],
+                    c = window.MutationObserver || window.WebKitMutationObserver,
+                    s = function() {
+                        var e = document.querySelector("body");
+                        return s = new c(a), ie("Create body MutationObserver"), s.observe(e, {
+                            attributes: !0,
+                            attributeOldValue: !1,
+                            characterData: !0,
+                            characterDataOldValue: !1,
+                            childList: !0,
+                            subtree: !0
+                        }), s
+                    }();
+                return {
+                    disconnect: function() {
+                        "disconnect" in s && (ie("Disconnect body MutationObserver"), s.disconnect(), u.forEach(o))
+                    }
+                }
+            }() : (ie("MutationObserver not supported in this browser!"), ge())
+        }()) : ie("Auto Resize disabled")
+    }
+
+    function ge() {
+        0 !== w && (ie("setInterval: " + w + "ms"), b = setInterval(function() {
+            Oe("interval", "setInterval: " + w)
+        }, Math.abs(w)))
+    }
+
+    function pe(e, t) {
+        var n = 0;
+        return t = t || document.body, n = null !== (n = document.defaultView.getComputedStyle(t, null)) ? n[e] : 0, parseInt(n, o)
+    }
+
+    function ve(e, t) {
+        for (var n = t.length, o = 0, i = 0, r = ne(e), a = G(), u = 0; u < n; u++) i < (o = t[u].getBoundingClientRect()[e] + pe("margin" + r, t[u])) && (i = o);
+        return a = G() - a, ie("Parsed " + n + " HTML elements"), ie("Element position calculated in " + a + "ms"),
+            function(e) {
+                R / 2 < e && ie("Event throttle increased to " + (R = 2 * e) + "ms")
+            }(a), i
+    }
+
+    function ye(e) {
+        return [e.bodyOffset(), e.bodyScroll(), e.documentElementOffset(), e.documentElementScroll()]
+    }
+
+    function we(e, t) {
+        var n = document.querySelectorAll("[" + t + "]");
+        return 0 === n.length && (re("No tagged elements (" + t + ") found on page"), document.querySelectorAll("body *")), ve(e, n)
+    }
+
+    function be() {
+        return document.querySelectorAll("body *")
+    }
+
+    function Te(e, t, n, o) {
+        var i, r;
+
+        function a(e, t) {
+            return !(Math.abs(e - t) <= z)
+        }
+        i = u !== n ? n : Z[g](), r = u !== o ? o : $[F](), a(m, i) || s && a(x, r) || "init" === e ? (Se(), Ne(m = i, x = r, e)) : e in {
+            init: 1,
+            interval: 1,
+            size: 1
+        } || !(g in M || s && F in M) ? e in {
+            interval: 1
+        } || ie("No change in size detected") : Ie(t)
+    }
+
+    function Ee() {
+        Y = G(), X = null, Q = U.apply(V, K), X || (V = K = null)
+    }
+
+    function Oe(e, t, n, o) {
+        k && e in d ? ie("Trigger event cancelled: " + e) : (e in {
+            reset: 1,
+            resetPage: 1,
+            init: 1
+        } || ie("Trigger event: " + t), "init" === e ? Te(e, t, n, o) : _(e, t, n, o))
+    }
+
+    function Se() {
+        k || (k = !0, ie("Trigger event lock on")), clearTimeout(e), e = setTimeout(function() {
+            k = !1, ie("Trigger event lock off"), ie("--")
+        }, l)
+    }
+
+    function Me(e) {
+        m = Z[g](), x = $[F](), Ne(m, x, e)
+    }
+
+    function Ie(e) {
+        var t = g;
+        g = h, ie("Reset trigger event: " + e), Se(), Me("reset"), g = t
+    }
+
+    function Ne(e, t, n, o, i) {
+        var r;
+        !0 === N && (u === i ? i = C : ie("Message targetOrigin: " + i), ie("Sending message to host page (" + (r = S + ":" + (e + ":" + t) + ":" + n + (u !== o ? ":" + o : "")) + ")"), A.postMessage(E + r, i))
+    }
+
+    function Ae() {
+        "loading" !== document.readyState && window.parent.postMessage("[iFrameResizerChild]Ready", "*")
+    }
+}();
+//# sourceMappingURL=iframeResizer.contentWindow.map
+</script>
+<script src="../Scripts/site/iframeSizer.contentWindow.min.js"></script>
+<script>
+
+        //Select risk free option in the standard calculator
+     //   alert('here');
+
+        if (getQueryVariable("r") == "1") {
+            document.getElementById("ddlBetType").selectedIndex = 3;
+            document.getElementById("ddlBetType").disabled = true;
+        }
+
+        function getQueryVariable(variable) {
+         //   alert('here');
+            var query = window.location.search.substring(1);
+         //   alert(query);
+            var vars = query.split("&");
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split("=");
+              //  alert(pair[0] + '-' + pair[1]);
+                if (pair[0] == variable) {  return pair[1]; }
+            }
+            return (false);
+        }
+      
+    </script>
+</body>
+</html>
